@@ -12,6 +12,7 @@ class ExerciseList extends React.Component{
                     exercise={this.props.exercises[key]}
                     updateExercise ={this.props.updateExercise}
                     deleteExercise = {this.props.deleteExercise}
+                    addDayExercise = {this.props.addDayExercise}
                 />
                )}
             </div>

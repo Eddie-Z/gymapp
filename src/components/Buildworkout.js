@@ -1,11 +1,21 @@
 import React from 'react'
 import AddWorkoutForm from './AddWorkoutForm'
 import ExerciseList from './ExerciseList'
+import Days from './Days'
 import base from "../base";
 
 class Buildworkout extends React.Component {
     state ={
-        exercises:{}
+        exercises:{},
+        //which div is selected
+        selectedRoutine:{},
+        //exercises for the states
+        day1s:{},
+        day2s:{},
+        day3s:{}
+        
+
+
     };
 
     addExercise = exercise =>{
@@ -30,6 +40,57 @@ class Buildworkout extends React.Component {
         delete exercises[key]
         this.setState({exercises:exercises});
     };
+    updateSelectedRoutine = (chosen) =>{
+        let selectedRoutine;
+        switch(chosen){
+            case "day1":
+                selectedRoutine = {...this.state.selectedRoutine}
+                selectedRoutine="day1"
+                this.setState({selectedRoutine:selectedRoutine})
+                break;
+            case "day2":
+                selectedRoutine = {...this.state.selectedRoutine}
+                selectedRoutine="day2"
+                this.setState({selectedRoutine:selectedRoutine})
+                break;
+            case "day3":
+                selectedRoutine = {...this.state.selectedRoutine}
+                selectedRoutine="day3"
+                this.setState({selectedRoutine:selectedRoutine})
+                break;
+        default:
+            alert('Choose');
+        }
+    }
+    addDayExercise = (key) =>{
+        const exercises = {...this.state.exercises};
+        const dayExercise = exercises[key];
+        switch(this.state.selectedRoutine){
+            case "day1":
+                    const day1s = {...this.state.day1s};
+                    //add new exercise
+                    day1s[`day1${Date.now()}`] = dayExercise;
+                    //set state as new state
+                    this.setState({day1s:day1s});
+                break;
+            case "day2":
+                    const day2s = {...this.state.day2s};
+                    //add new exercise
+                    day2s[`day2${Date.now()}`] = dayExercise;
+                    //set state as new state
+                    this.setState({day2s:day2s});
+                break;
+            case "day3":
+                    const day3s = {...this.state.day3s};
+                    //add new exercise
+                    day3s[`day3${Date.now()}`] = dayExercise;
+                    //set state as new state
+                    this.setState({day3s:day3s});
+                break;
+            default:
+                alert("error");
+        }
+    }
 
     render(){
         return(
@@ -37,7 +98,9 @@ class Buildworkout extends React.Component {
                 <h2>Add</h2>
                 <AddWorkoutForm addExercise={this.addExercise}/>
                 <h2>Exercise List(All Exercises)</h2>
-                <ExerciseList exercises={this.state.exercises} updateExercise={this.updateExercise} deleteExercise={this.deleteExercise}/>
+                <ExerciseList exercises={this.state.exercises} updateExercise={this.updateExercise} deleteExercise={this.deleteExercise} addDayExercise={this.addDayExercise}/>
+                <h2>Days</h2>
+                <Days day1s={this.state.day1s} day2s={this.state.day2s} day3s={this.state.day3s} selectedRoutine={this.state.selectedRoutine} exercises={this.state.exercises}  updateSelectedRoutine={this.updateSelectedRoutine}/>
             </div>
         )
     }

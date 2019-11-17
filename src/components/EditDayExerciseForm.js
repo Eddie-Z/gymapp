@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-class EditExerciseForm extends React.Component{
+class EditDayExerciseForm extends React.Component{
 
     //handle edit
     handleChange = event => {
@@ -33,11 +33,10 @@ class EditExerciseForm extends React.Component{
             <input type="text" name="youtubeURL" value={this.props.exercise.optionYoutubeUrl} onChange={this.handleChange}/>
             <input type="text" name="type" value={this.props.exercise.type} onChange={this.handleChange}/>
             <button onClick={this.handleDelete}>Remove Exercise</button>
-            <button onClick={this.handleAdd}>Add To</button>
             </div>
         )
     }
 }
 
 
-export default EditExerciseForm;
+export default EditDayExerciseForm;
