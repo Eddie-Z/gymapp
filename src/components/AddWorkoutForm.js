@@ -1,47 +1,55 @@
 import React from 'react';
+import Typography from '@material-ui/core/Typography'
+import Grid from '@material-ui/core/Grid';
+import { TextField, MenuItem ,Button, Select, InputLabel,FormControl} from '@material-ui/core';
 
 class AddWorkoutForm extends React.Component{
-    //get inputs
-    exerciseNameRef = React.createRef(); 
-    idealSetsRef = React.createRef();
-    idealRepsRef = React.createRef();
-    restTimeRef = React.createRef();
-    optionYoutubeUrlRef = React.createRef();
-    typeRef = React.createRef();
-
+     state = {
+        exerciseName: '',
+        idealSets: '',
+        idealReps:'',
+        restTime: '',
+        optionYoutubeUrl: '', 
+        type: ''
+    };
     //create object
     createExercise = event => {
         event.preventDefault();
-        const exercise = {
-            exerciseName:this.exerciseNameRef.current.value,
-            idealSets:this.idealSetsRef.current.value,
-            idealRepsRef: this.idealRepsRef.current.value,
-            restTime: this.restTimeRef.current.value,
-            optionYoutubeUrl: this.optionYoutubeUrlRef.current.value,
-            type: this.typeRef.current.value
-        };
-        console.log(this.exerciseNameRef.current.value)
-        this.props.addExercise(exercise);
+        this.props.addExercise(this.state);
         event.currentTarget.reset();
 
     };
 
+    handleChange = input => e => {
+        this.setState({ [input]: e.target.value });
+      };
+
     render(){
         return(
+            <React.Fragment>
+            <Grid>
             <form onSubmit={this.createExercise}>
-                <input name="exerciseName" ref={this.exerciseNameRef}placeholder="Exercise Name"/>
-                <input name="idealSets" ref={this.idealSetsRef}placeholder="Ideals Sets"/>
-                <input name="idealReps" ref={this.idealRepsRef}placeholder="Ideal Reps"/>
-                <input name="restTime" ref={this.restTimeRef}placeholder="Rest Time"/>
-                <input name="optionYoutubeUrl" ref={this.optionYoutubeUrlRef}placeholder="Optional Youtube Video"/>
-                <select name="type" ref={this.typeRef}>
-                    <option>Upper Body</option>
-                    <option>Lower Body</option>
-                    <option>Other</option>
-                </select>
-                <button type="submit">Add Exercise</button>
+       
+                <TextField fullWidth name="exerciseName" label="Exercise Name" margin="normal" onChange={this.handleChange('exerciseName')}/>     
+                <TextField fullWidth name="idealSets" label="Ideal Sets" margin="normal"  onChange={this.handleChange('idealSets')}/>
+                <TextField fullWidth name="idealReps" label="Ideal Reps" margin="normal"  onChange={this.handleChange('idealReps')}/>
+                <TextField fullWidth name="restTime" label="Rest Time" margin="normal"  onChange={this.handleChange('restTime')}/>
+                <TextField fullWidth name="optionYoutubeUrl" label="Youtube Video" margin="normal" onChange={this.handleChange('optionYoutubeUrl')}/>
+
+                <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">Exerise Category</InputLabel>
+                    <Select  id="demo-simple-select" labelId="demo-simple-select-label" fullWidth name="type" onChange={this.handleChange('type')} >
+                        <MenuItem value="Upper Body">Upper Body</MenuItem>
+                        <MenuItem value="Lower Body">Lower Body</MenuItem>
+                        <MenuItem value="Other">Other</MenuItem>
+                    </Select>
+                </FormControl>
+
+                <Button fullWidth type="submit">Add Exercise</Button>
 
             </form>
+            </Grid>
+            </React.Fragment>
         )
     }
 }

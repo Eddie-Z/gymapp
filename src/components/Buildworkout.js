@@ -2,9 +2,39 @@ import React from 'react'
 import AddWorkoutForm from './AddWorkoutForm'
 import ExerciseList from './ExerciseList'
 import Days from './Days'
-import base from "../base";
+import Paper from '@material-ui/core/Paper';
+import Header from './Header';
+import { TextField, CardActions ,Button, CardContent, Grid,Card, Typography,Tabs,Tab,AppBar} from '@material-ui/core';
+
+
+const style = {
+    paper: {
+      padding:30,
+      width:400,
+      height:'80vh',
+      margin:5,
+      overflow:'scroll'
+    },
+    paper3: {
+        padding:30,
+        width:400,
+        height:'73vh',
+        margin:5,
+        overflow:'scroll'
+      },
+    appBar: {
+        top: 'auto',
+        bottom: 0,
+        margin:7,
+        width:463
+
+      }
+  };
+
+  
 
 class Buildworkout extends React.Component {
+
     state ={
         exercises:{},
         //which div is selected
@@ -13,11 +43,8 @@ class Buildworkout extends React.Component {
         day1s:{},
         day2s:{},
         day3s:{}
-        
-
-
     };
-
+    
     addExercise = exercise =>{
         //take copy of exisiting exercises
         const exercises = {...this.state.exercises};
@@ -93,17 +120,59 @@ class Buildworkout extends React.Component {
     }
 
     render(){
+        
         return(
-            <div>
-                <h2>Add</h2>
-                <AddWorkoutForm addExercise={this.addExercise}/>
-                <h2>Exercise List(All Exercises)</h2>
-                <ExerciseList exercises={this.state.exercises} updateExercise={this.updateExercise} deleteExercise={this.deleteExercise} addDayExercise={this.addDayExercise}/>
-                <h2>Days</h2>
-                <Days day1s={this.state.day1s} day2s={this.state.day2s} day3s={this.state.day3s} selectedRoutine={this.state.selectedRoutine} exercises={this.state.exercises}  updateSelectedRoutine={this.updateSelectedRoutine}/>
-            </div>
+
+            <Grid container >
+                    <Header/>
+                
+                    <Grid item sm>
+                        <Paper style={style.paper}>
+                            <Typography color="textSecondary">
+                            ADD EXERCISE
+                            </Typography>
+                            <AddWorkoutForm addExercise={this.addExercise}/>
+                        </Paper>
+                    </Grid>
+                
+                    <Grid item sm>
+                        <Paper style={style.paper}>
+                                <Typography color="textSecondary">
+                                EXERCISE COLLECTION
+                                </Typography>
+                                <ExerciseList exercises={this.state.exercises} updateExercise={this.updateExercise} deleteExercise={this.deleteExercise} addDayExercise={this.addDayExercise}/>
+                            
+                        </Paper>
+                    </Grid>
+                
+                    <Grid item sm>
+                    
+                        <Paper style={style.paper3}>
+                                <Typography color="textSecondary">
+                                EXERCISE ROUTINE
+                                </Typography>
+                                <Days day1s={this.state.day1s} day2s={this.state.day2s} day3s={this.state.day3s} selectedRoutine={this.state.selectedRoutine} exercises={this.state.exercises}  updateSelectedRoutine={this.updateSelectedRoutine}/>
+                                
+                                
+                        </Paper>
+                        <AppBar position="relative" color="default" style={style.appBar}>
+                                    <Tabs
+                                    indicatorColor="primary"
+                                    textColor="primary"
+                                    variant="fullWidth"
+                                    aria-label="full width tabs example"
+                                    >
+                                    <Tab label="All" />
+                                    <Tab label="Day 1" />
+                                    <Tab label="Day 2"/>
+                                    </Tabs>
+                                </AppBar>
+                    </Grid>
+                    
+            </Grid>
         )
     }
 
 }
 export default Buildworkout
+
