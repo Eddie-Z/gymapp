@@ -1,11 +1,45 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import EditExerciseForm from './EditExerciseForm'
 import {ExpansionPanel,ExpansionPanelSummary,Typography,ExpansionPanelDetails,Grid} from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-class ExerciseList extends React.Component{
-    render(){
-        return(
+import {BuildWorkoutContext} from '../contexts/Provider'
+
+const ExerciseList = () => {
+    const {exercises} = useContext(BuildWorkoutContext);
+    //console.log(exercises)
+        return exercises.length ?(
             <Grid>
+                    <ul>
+                    {
+                        (exercises).map( exercise => 
+                           
+                            <ExpansionPanel >
+                                <ExpansionPanelSummary
+                                expandIcon={<ExpandMoreIcon />}
+                                aria-controls="panel1a-content"
+                                id="panel1a-header"
+                                >
+                                <Typography>{exercise.exerciseName}</Typography>
+                                </ExpansionPanelSummary>
+                                
+                                <ExpansionPanelDetails>
+                                <Typography>
+                                  <EditExerciseForm exercise={exercise} key={exercise.id}/>
+                                </Typography>
+                                </ExpansionPanelDetails>
+                            </ExpansionPanel>
+                       
+                        )
+                    }
+                    </ul>
+                
+            </Grid>
+        ) : <Typography>Add Some Exercises</Typography>
+}
+export default ExerciseList;
+
+/*
+       <Grid>
                 <ul>
                 
                {Object.keys(this.props.exercises).map(key =>
@@ -34,15 +68,7 @@ class ExerciseList extends React.Component{
                     </Typography>
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
-
-
-
-
-               
                )}
                </ul>
             </Grid>
-        );
-    }
-}
-export default ExerciseList;
+*/

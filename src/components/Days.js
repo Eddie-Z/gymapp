@@ -1,17 +1,115 @@
-import React from 'react';
-import EditDayExerciseForm from './EditDayExerciseForm'
-import { List,ListItem, ListItemText, Typography, Divider,Grid} from '@material-ui/core';
+import React, {useContext} from 'react';
+import { List,ListItem, ListItemText, Typography, Divider,Grid,IconButton} from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
+import {BuildWorkoutContext} from '../contexts/Provider'
 
-class Days extends React.Component{
+const Days = () => {
+    const {days1,days2,days3, updateSelectedRoutine,removeRoutine} = useContext(BuildWorkoutContext);
 
-    handleClick = (event) => {
-        
-        this.props.updateSelectedRoutine(event.currentTarget.className);
-        console.log(event.currentTarget.className);
+    const handleClick = (e) => {   
+        updateSelectedRoutine(e.currentTarget.className);
+        console.log(e.currentTarget.className);
     }
-    render(){
+    const handleRemove = (id) => {   
+        removeRoutine(id)
+    }
+ 
         return(
             <React.Fragment>
+                <List className="day1">
+                    <span className="day1" onClick = {handleClick}><Typography variant="body2" color="textSecondary">DAY 1</Typography></span>
+                    {(days1).map(exercise =>
+                        <Grid>
+                        <ListItem alignItems="flex-start">
+                            <ListItemText
+                                primary={exercise.exerciseName}
+                                secondary={
+                                <React.Fragment>
+                                    <Typography
+                                    component="span"
+                                    variant="body2"
+                                    color="textPrimary"
+                                    >
+                                    {days1.type}
+                                    </Typography>
+                                    - {exercise.idealSets} Set x {exercise.idealReps} Reps | {exercise.restTime}s Rest
+                                </React.Fragment>
+                                }
+                            />
+                            <IconButton size="small" onClick = {() => handleRemove(exercise.id)}> <DeleteIcon/></IconButton>
+                        </ListItem>
+                        <Divider variant="inset" component="li" />
+                        </Grid>
+                    )}
+                </List>
+
+                <List className="day2">
+                    <span className="day2" onClick = {handleClick}><Typography variant="body2" color="textSecondary">DAY 2</Typography></span>
+                    {(days2).map(exercise =>
+                        <Grid>
+                        <ListItem alignItems="flex-start">
+                            <ListItemText
+                                primary={exercise.exerciseName}
+                                secondary={
+                                <React.Fragment>
+                                    <Typography
+                                    component="span"
+                                    variant="body2"
+                                    color="textPrimary"
+                                    >
+                                    {days2.type}
+                                    </Typography>
+                                    - {exercise.idealSets} Set x {exercise.idealReps} Reps | {exercise.restTime}s Rest
+                                </React.Fragment>
+                                }
+                            /> 
+                            <IconButton size="small" onClick = {() => handleRemove(exercise.id)}> <DeleteIcon/></IconButton>
+                        </ListItem>
+                        
+                        <Divider variant="inset" component="li" />
+                        
+                        </Grid>
+                        
+                    )}
+                </List>
+
+                <List className="day3">
+                    <span className="day3" onClick = {handleClick}><Typography variant="body2" color="textSecondary">DAY 3</Typography></span>
+                    {(days3).map(exercise =>
+                        <Grid>
+                        <ListItem alignItems="flex-start">
+                            <ListItemText
+                                primary={exercise.exerciseName}
+                                secondary={
+                                <React.Fragment>
+                                    <Typography
+                                    component="span"
+                                    variant="body2"
+                                    color="textPrimary"
+                                    >
+                                    {days3.type}
+                                    </Typography>
+                                    - {exercise.idealSets} Set x {exercise.idealReps} Reps | {exercise.restTime}s Rest
+                                </React.Fragment>
+                                }
+                            />
+                            <IconButton size="small" onClick = {() => handleRemove(exercise.id)}> <DeleteIcon/></IconButton>
+                        </ListItem>
+                        <Divider variant="inset" component="li" />
+                        </Grid>
+                    )}
+                </List>
+
+            </React.Fragment>
+            
+
+        );
+    
+}
+
+export default Days
+/*
+    <React.Fragment>
     
             <List className="day1">
             <span className="day1" onClick = {this.handleClick}><Typography variant="body2" color="textSecondary">DAY 1</Typography></span>
@@ -108,10 +206,4 @@ class Days extends React.Component{
 
           </React.Fragment>
 
-
-
-        );
-    }
-}
-
-export default Days
+*/
