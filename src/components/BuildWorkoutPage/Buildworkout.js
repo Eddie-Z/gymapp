@@ -5,7 +5,6 @@ import Days from './Days'
 import Paper from '@material-ui/core/Paper';
 import Header from './Header';
 import { Grid, Typography,Tabs,Tab,AppBar} from '@material-ui/core';
-import BuildWorkoutContextProvider from '../contexts/Provider';
 
 
 const style = {
@@ -33,14 +32,9 @@ const style = {
   };
 
  
-
-  
-
-class Buildworkout extends React.Component {
-    render(){
-        
+//could replace with material-table https://material-ui.com/components/tables/
+const Buildworkout = () => {
         return(
-            <BuildWorkoutContextProvider>
                 <Grid container >
                         <Header/>
                     
@@ -52,26 +46,20 @@ class Buildworkout extends React.Component {
                                 <AddWorkoutForm/>
                             </Paper>
                         </Grid>
-                    
                         <Grid item sm>
                             <Paper style={style.paper}>
                                     <Typography color="textSecondary">
                                     EXERCISE COLLECTION
                                     </Typography>
                                     <ExerciseList />
-                                
                             </Paper>
                         </Grid>
-                    
                         <Grid item sm>
-                        
                             <Paper style={style.paper3}>
                                     <Typography color="textSecondary">
                                     EXERCISE ROUTINE
                                     </Typography>
-                                    <Days />
-                                    
-                                    
+                                    <Days />  
                             </Paper>
                             <AppBar position="relative" color="default" style={style.appBar}>
                                         <Tabs
@@ -84,14 +72,10 @@ class Buildworkout extends React.Component {
                                         <Tab label="Day 1" />
                                         <Tab label="Day 2"/>
                                         </Tabs>
-                                    </AppBar>
-                        </Grid>
-                        
+                            </AppBar>
+                        </Grid>             
                 </Grid>
-            </BuildWorkoutContextProvider>
         )
-    }
-
 }
 export default Buildworkout
 

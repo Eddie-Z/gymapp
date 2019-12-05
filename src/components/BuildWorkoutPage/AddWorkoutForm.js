@@ -1,5 +1,5 @@
 import React, {useContext,useState} from 'react';
-import {BuildWorkoutContext} from '../contexts/Provider'
+import {BuildWorkoutContext} from '../../contexts/Provider'
 import Grid from '@material-ui/core/Grid';
 import { TextField, MenuItem ,Button, Select, InputLabel,FormControl} from '@material-ui/core';
 
