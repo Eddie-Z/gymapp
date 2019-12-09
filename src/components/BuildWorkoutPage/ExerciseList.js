@@ -11,7 +11,7 @@ import {BuildWorkoutContext} from '../../contexts/Provider'
             <Grid>
                     <ul>
                     <Grid>
-
+                     
                         {state.exercise.map(eachExercise =>
                         <ExpansionPanel >
                            <ExpansionPanelSummary
@@ -19,7 +19,6 @@ import {BuildWorkoutContext} from '../../contexts/Provider'
                            aria-controls="panel1a-content"
                            id="panel1a-header"
                            >
-
                            <Typography> {eachExercise.exerciseName} </Typography>
                            </ExpansionPanelSummary>
                            

@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component, useContext } from 'react'
 import { Grid, Paper,Tabs,Tab,AppBar,Button} from '@material-ui/core';
 import { Link } from 'react-router-dom';
-
+import {BuildWorkoutContext} from '../../contexts/Provider'
 
 const style = {
     paper: {
@@ -14,6 +14,8 @@ const style = {
 
 
 const FrontPage = () => {
+    const {spells} = useContext(BuildWorkoutContext);
+
 
         return (
             <Grid container >
@@ -22,7 +24,13 @@ const FrontPage = () => {
                     <Grid container justify="center" >
                         <Grid item >
                             <Paper style={style.paper}>      
-                            <Button component={Link} to="/buildworkout" color="primary">
+
+                            {spells.map(spell => (
+                             
+                                    console.log(spell)
+                            
+                            ))}
+                                                    <Button component={Link} to="/buildworkout" color="primary">
                             MyButton
                             </Button>              
                             <Button component={Link} to="workout" color="primary">

@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import FrontPage from "./components/FrontPage/FrontPage";
 import BuildWorkout from "./components/BuildWorkoutPage/Buildworkout";
+import Header from './Header';
 import Workout from "./components/WorkoutPage/workout";
 
 
@@ -9,7 +10,9 @@ import  {BuildWorkoutContextProvider } from "./contexts/Provider";
 
 const App = () => {
   return(
+  
     <BuildWorkoutContextProvider>
+        <Header/>
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={FrontPage} />
