@@ -53,9 +53,35 @@ const useStyles = makeStyles(theme => ({
 
  const GymSession = () => {
 
+
+  const [seconds, setSeconds] = React.useState(0);
+  const [isActive, setIsActive] = React.useState(false);
+
+  function toggle() {
+    setIsActive(!isActive);
+  }
+
+  function reset() {
+    setSeconds(0);
+    setIsActive(false);
+  }
+
+  useEffect(() => {
+    let interval = null;
+    if (isActive) {
+      interval = setInterval(() => {
+        setSeconds(seconds => seconds + 1);
+      }, 1000);
+    } else if (!isActive && seconds !== 0) {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [isActive, seconds]);
+
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [expanded2, setExpanded2] = React.useState(false);
+
   
 
   let initialDayState = 0
@@ -89,9 +115,53 @@ const useStyles = makeStyles(theme => ({
     setCardState(cardState+1)   
   }
   const nextSet = () =>{
-    
+    console.log(setsState)
+    console.log(state.exercise[cardState].idealSets)
     setSetsState(setsState+1)
+    reset()
+    //reset
+    if(setsState==state.exercise[cardState].idealSets-1){
+      setCardState(cardState+1) 
+      setSetsState(0)
+     
+    }
+
+    const finishedExercise = {
+       [`${Date.now()}`] : {
+        day:"1",
+        exerciseName:"yo",
+        finishedReps:"yo",
+        restTime:"yo"
+      }
+    }
+    const db = firebase.firestore();
+   db.collection("spells").doc("exerciseHistory").set(finishedExercise);
+   
+    
+  //   const addExercise = (exerciseName,idealSets,idealReps,restTime,optionYoutubeUrl,type) => {
+  //     const inputExercise= {
+  //         exerciseName: exerciseName,
+  //         idealSets: idealSets,
+  //         idealReps:idealReps,
+  //         restTime: restTime,
+  //         optionYoutubeUrl: optionYoutubeUrl,
+  //         type: type,
+  //         id: uuid()
+  //      }
+
+  //      const newExercise = JSON.parse(JSON.stringify(state));
+  //      newExercise.exercise= [...state.exercise,inputExercise]
+  //    //  console.log(newExercise)
+  //   //   setState(newExercise);
+
+  //      //firebase addd
+  //      const db = firebase.firestore();
+  //      db.collection("spells").doc("0").set(newExercise);
+      
+  // }
   }
+
+
 
   let selectedExercise = state.exercise[cardState];
   return (
@@ -133,24 +203,25 @@ const useStyles = makeStyles(theme => ({
         
           <CardContent>
     
-          <Countdown restTime={selectedExercise.restTime}/>
-          
+          <div className="time">
+            {seconds}s
+          </div>
+          <div className="row">
+            <Button  variant="contained" color="primary" onClick={toggle}>
+              {isActive ? 'Pause' : 'Start'}
+            </Button>
+            <Button onClick={reset} variant="contained" color="primary">
+              Reset
+            </Button>
+          </div>
+              
           </CardContent>
 
           <CardActions disableSpacing>
           <Button variant="contained" color="primary" onClick={nextSet}>
             Next Set
           </Button>
-          <Button variant="contained" color="primary">
-            Pause
-          </Button>
-          <Button variant="contained" color="primary">
-            Reset
-          </Button>
-          <Button variant="contained" color="primary">
-            Rest
-          </Button>
-
+    
             <IconButton
               className={clsx(classes.expand, {
                 [classes.expandOpen]: expanded,
