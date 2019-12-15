@@ -1,7 +1,7 @@
 # Purpose
 This application was developed to be a useful tool for me at the gym and to further develop skills in ReactJS. I chose to create a Gym app because it allows me to start off with the basics of React and as I progress and learn, I will be able to further improve the application. The idea is also verstaile in that, it would be something I would use on a daily basis. Also, it allows me to further dive into ui design, databases, and responsiveness.
 
-# nspiration
+# Inspiration
 In the gym, there are multiple variables to keep track of if you want to maximize growth. Personally, I enjoy training with low rest times. This allows me to be more efficient with my time and also fatigue the muscle better. It is also important to progressive overload, which means to increase weight as you get stronger. With that being said, this application will track your rest time per set of an exercise and log weights like in any other application. Aside from logging rest time, what makes this unique is that, users will have the ability to enter in a YouTube video of an exercise they found useful to them and view it via the app. YouTube was a very valuable asset to my training when i was a beginner.
 
 # What I've learned/Improved
