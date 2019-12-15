@@ -11,7 +11,6 @@ import {BuildWorkoutContext} from '../../contexts/Provider'
             <Grid>
                     <ul>
                     <Grid>
-                     
                         {state.exercise.map(eachExercise =>
                         <ExpansionPanel >
                            <ExpansionPanelSummary

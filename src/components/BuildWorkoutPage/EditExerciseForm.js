@@ -7,23 +7,28 @@ import {BuildWorkoutContext} from '../../contexts/Provider'
 
  const EditExerciseForm = ({eachExercise}) => {
     const {state,setState,removeExercise,updateExercise,addToDay} = useContext(BuildWorkoutContext);
+    const [exerciseName,setExerciseName] = React.useState(eachExercise.exerciseName)
+    const [idealReps,setIdealReps] = React.useState(eachExercise.idealReps)
+    const [idealSets,setIdealSets] = React.useState(eachExercise.idealSets)
+    const [restTime,setRestTime] = React.useState(eachExercise.restTime)
+    const [optionYoutubeUrl,setOptionYoutubeUrl] = React.useState(eachExercise.optionYoutubeUrl)
 
     //handle edit
-    const handleChange = (event) => {
+    const handleEdit = (event) => {
         console.log(event.currentTarget.value)
-        const newExercise = JSON.parse(JSON.stringify(eachExercise));
-        const updatedExercise = {
-            ...newExercise,
-            [event.currentTarget.name]:event.currentTarget.value
-        }
-        //
+        // const newExercise = JSON.parse(JSON.stringify(eachExercise));
         // const updatedExercise = {
-        //     //every attribute of the exercise then the new one
-        //     ...this.props.exercise,
+        //     ...newExercise,
         //     [event.currentTarget.name]:event.currentTarget.value
         // }
+        // //
+        // // const updatedExercise = {
+        // //     //every attribute of the exercise then the new one
+        // //     ...this.props.exercise,
+        // //     [event.currentTarget.name]:event.currentTarget.value
+        // // }
 
-         updateExercise(eachExercise.id,updatedExercise);
+        //  updateExercise(eachExercise.id,updatedExercise);
     };
     //handle delete
     const handleRemove = () => {
@@ -42,11 +47,11 @@ import {BuildWorkoutContext} from '../../contexts/Provider'
             <Grid container >
                 <Card >
                     <CardContent>
-                    <TextField fullWidth name="exerciseName" label="Exercise Name" margin="normal" value={eachExercise.exerciseName} onChange={handleChange}/>
-                    <TextField fullWidth name="idealSets" label="Ideal Sets" margin="normal" value={eachExercise.idealSets}  onChange={handleChange} />
-                    <TextField fullWidth name="idealReps" label="Ideal Reps" margin="normal" value={eachExercise.idealReps}  onChange={handleChange}/>
-                    <TextField fullWidth name="restTime" label="Rest Time" margin="normal" value={eachExercise.restTime} onChange={handleChange}/>
-                    <TextField fullWidth name="optionYoutubeUrl" label="Youtube Video" value={eachExercise.optionYoutubeUrl} onChange={handleChange}/>
+                    <TextField fullWidth name="exerciseName" label="Exercise Name" margin="normal" value={exerciseName} onChange={e => setExerciseName(e.target.value)}/>
+                    <TextField fullWidth name="idealSets" label="Ideal Sets" margin="normal" value={idealSets}  onChange={e => setIdealSets(e.target.value)}/>
+                    <TextField fullWidth name="idealReps" label="Ideal Reps" margin="normal" value={idealReps}  onChange={e => setIdealReps(e.target.value)}/>
+                    <TextField fullWidth name="restTime" label="Rest Time" margin="normal" value={restTime} onChange={e => setRestTime(e.target.value)}/>
+                    <TextField fullWidth name="optionYoutubeUrl" label="Youtube Video" value={optionYoutubeUrl} onChange={e => setOptionYoutubeUrl(e.target.value)}/>
 
                     <FormControl fullWidth>
                     <InputLabel>Exercise Category</InputLabel>
@@ -60,6 +65,7 @@ import {BuildWorkoutContext} from '../../contexts/Provider'
                     </CardContent>
                     <CardActions>
                         <IconButton size="small" onClick={handleRemove}> <DeleteIcon/><Typography>Remove Exercise</Typography></IconButton>
+                       
                         <IconButton size="small" onClick={handleAdd}><AddIcon /><Typography>Add To</Typography></IconButton>
                     </CardActions>
 
@@ -70,3 +76,5 @@ import {BuildWorkoutContext} from '../../contexts/Provider'
  }
 
  export default EditExerciseForm;
+
+ // <IconButton size="small" onClick={handleEdit}><AddIcon /><Typography>Save Edit</Typography></IconButton>

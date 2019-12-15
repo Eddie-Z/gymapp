@@ -70,7 +70,6 @@ export function BuildWorkoutContextProvider({children}){
           const data =  await db.collection("spells").get();
                
             setState(data.docs[0].data());
-          
           //setSpells(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
         };
         fetchData();
@@ -103,7 +102,7 @@ export function BuildWorkoutContextProvider({children}){
          const newExercise = JSON.parse(JSON.stringify(state));
          newExercise.exercise= [...state.exercise,inputExercise]
        //  console.log(newExercise)
-      //   setState(newExercise);
+        setState(newExercise);
 
          //firebase addd
          const db = firebase.firestore();
@@ -115,7 +114,7 @@ export function BuildWorkoutContextProvider({children}){
     const removeExercise = (id) =>{
         const newExercise = JSON.parse(JSON.stringify(state));
         newExercise.exercise =newExercise.exercise.filter(exercise => exercise.id !== id);
-       // setState(newExercise)
+        setState(newExercise)
         const db = firebase.firestore();
         db.collection("spells").doc("0").set(newExercise);
     }
@@ -127,7 +126,7 @@ export function BuildWorkoutContextProvider({children}){
         newExercise.days2=(newExercise.days2).filter(exercise => exercise.id!==id);
         newExercise.days3= (newExercise.days3).filter(exercise => exercise.id!==id);
         
-        //setState(newExercise)
+        setState(newExercise)
         const db = firebase.firestore();
         db.collection("spells").doc("0").set(newExercise);
       
@@ -158,18 +157,18 @@ export function BuildWorkoutContextProvider({children}){
     switch(selectedRoutine.day){
         case "day1":      
              newExercise.days1=[...newExercise.days1,copyExercise]
-             //setState(newExercise)       
+             setState(newExercise)       
              db.collection("spells").doc("0").set(newExercise);
             break;
         case "day2":
             newExercise.days2=[...newExercise.days2,copyExercise]
             db.collection("spells").doc("0").set(newExercise);
-           // setState(newExercise)
+            setState(newExercise)
             break;
         case "day3":
                 newExercise.days3=[...newExercise.days3,copyExercise]
                 db.collection("spells").doc("0").set(newExercise);
-                //setState(newExercise)
+                setState(newExercise)
             break;
         default:
             alert("error");

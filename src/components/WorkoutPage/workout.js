@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { red } from '@material-ui/core/colors';
-import GymSession from './gymSession'
+import Tabs from './Tabs';
 
 
 const useStyles = makeStyles(theme => ({
@@ -30,8 +30,8 @@ const useStyles = makeStyles(theme => ({
 class Workout extends React.Component {
     render(){
         return (
-
-                <GymSession/>
+                  <Tabs/>
+               // <GymSession/>
         );
     }
 }
