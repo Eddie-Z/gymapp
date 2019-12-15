@@ -35,6 +35,7 @@ In the gym, there are multiple variables to keep track of if you want to maximiz
 * Press next set 
 
 # To be improved/added
+* Updating edit information
 * Deployment
 * Authorization
 * Mobile responsiveness
