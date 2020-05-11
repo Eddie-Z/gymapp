@@ -5,7 +5,8 @@ This application was developed to be a useful tool for me at the gym and to furt
 In the gym, there are multiple variables to keep track of if you want to maximize growth. Personally, I enjoy training with low rest times. This allows me to be more efficient with my time and also fatigue the muscle better. It is also important to progressive overload, which means to increase weight as you get stronger. With that being said, this application will track your rest time per set of an exercise and log weights like in any other application. Aside from logging rest time, what makes this unique is that, users will have the ability to enter in a YouTube video of an exercise they found useful to them and view it via the app. YouTube was a very valuable asset to my training when i was a beginner.
 
 # Progress
-https://www.youtube.com/watch?v=gTCjkpHK4UE&feature=youtu.be
+V2:https://youtu.be/MkQFyfrOkhY
+V1:https://www.youtube.com/watch?v=gTCjkpHK4UE&feature=youtu.be
 
 # What I've learned/Improved
 * React Hooks(useContext,useState, useEffect)
