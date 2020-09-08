@@ -1,17 +1,17 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 
+var firebaseConfig = {
+    apiKey: "AIzaSyBQSVuZGy6au1TDJOvnFgAYfG8PRWMnY90",
+    authDomain: "reactjsgymproject.firebaseapp.com",
+    databaseURL: "https://reactjsgymproject.firebaseio.com",
+    projectId: "reactjsgymproject",
+    storageBucket: "reactjsgymproject.appspot.com",
+    messagingSenderId: "804052329299",
+    appId: "1:804052329299:web:ddd775b6928476669a77a6",
+    measurementId: "G-TG9QWDN4FN"
+  };
 
+  firebase.initializeApp(firebaseConfig);
 
-const firebaseConfig = firebase.initializeApp({
-    apiKey: "AIzaSyB_0xlCydAuahjIUT-cCGHqKz1QDjnEZv0",
-    authDomain: "gymapp1-637bb.firebaseapp.com",
-    databaseURL: "https://gymapp1-637bb.firebaseio.com",
-    projectId: "gymapp1-637bb",
-    storageBucket: "gymapp1-637bb.appspot.com",
-    messagingSenderId: "418455911867",
-    appId: "1:418455911867:web:8882f0ecc72d56e717989e",
-    measurementId: "G-Z70ZZZG3CM"
-});
-
-export default firebaseConfig;
+  export default firebase;

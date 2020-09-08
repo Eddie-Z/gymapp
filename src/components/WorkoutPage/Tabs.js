@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext,useEffect,useState} from 'react';
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -9,6 +9,8 @@ import Typography from '@material-ui/core/Typography';
 import { green } from '@material-ui/core/colors';
 import Box from '@material-ui/core/Box';
 import GymSession from './gymSession'
+import {BuildWorkoutContext} from '../../contexts/Provider'
+import firebase from '../../firebase'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -43,7 +45,7 @@ function a11yProps(index) {
 const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.background.paper,
-    width: 500,
+    width: 1200,
     position: 'relative',
     minHeight: 200,
     margin:'auto'
@@ -65,7 +67,8 @@ const useStyles = makeStyles(theme => ({
 export default function FloatingActionButtonZoom() {
   const classes = useStyles();
   const theme = useTheme();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
+   
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -74,6 +77,14 @@ export default function FloatingActionButtonZoom() {
   const handleChangeIndex = index => {
     setValue(index);
   };
+
+ const {monday,editUrl,exerciseIndex} = useContext(BuildWorkoutContext);
+
+
+  const mondayExercise = monday[Object.keys(monday)[exerciseIndex]];
+  console.log(mondayExercise);
+  const monKey = Object.keys(monday)[exerciseIndex]
+ 
 
   return (
     <div className={classes.root}>
@@ -86,9 +97,13 @@ export default function FloatingActionButtonZoom() {
           variant="fullWidth"
           aria-label="action tabs example"
         >
-          <Tab label="Day One" {...a11yProps(0)} />
-          <Tab label="Day Two" {...a11yProps(1)} />
-          <Tab label="Day Three" {...a11yProps(2)} />
+          <Tab label="MONDAY" {...a11yProps(0)} />
+          <Tab label="TUESDAY" {...a11yProps(1)} />
+          <Tab label="WEDNESDAY" {...a11yProps(2)} />
+          <Tab label="THURSDAY" {...a11yProps(3)} />
+          <Tab label="FRIDAY" {...a11yProps(4)} />
+          <Tab label="SATURDAY" {...a11yProps(5)} />
+          <Tab label="SUNDAY" {...a11yProps(6)} />
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -96,15 +111,32 @@ export default function FloatingActionButtonZoom() {
         index={value}
         onChangeIndex={handleChangeIndex}
       >
-        <TabPanel value={value} index={0} dir={theme.direction}>
-        
-          <GymSession whichDay={'days1'}/>
+        <TabPanel value={value} index={0} dir={theme.direction}> 
+            { mondayExercise ? <GymSession index={monKey} routine={mondayExercise} editUrl={editUrl}/> : <p>Congrats, you have finished the routine or didn't add</p> }
+   
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-        <GymSession whichDay={'days2'}/>
+            {mondayExercise ? <GymSession index={monKey} routine={mondayExercise} editUrl={editUrl} exerciseIndex={exerciseIndex} />  : <p>Congrats, you have finished the routine or didn't add</p> }
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-        <GymSession whichDay={'days3'}/>
+            { mondayExercise ?<GymSession index={monKey} routine={mondayExercise} editUrl={editUrl} exerciseIndex={exerciseIndex} />  : <p>Congrats, you have finished the routine or didn't add</p>}
+  
+        </TabPanel>
+        <TabPanel value={value} index={3} dir={theme.direction}>
+        { mondayExercise ?<GymSession index={monKey} routine={mondayExercise} editUrl={editUrl} exerciseIndex={exerciseIndex} /> : <p>Congrats, you have finished the routine or didn't add</p> }
+  
+        </TabPanel>
+        <TabPanel value={value} index={4} dir={theme.direction}>
+        { mondayExercise ?<GymSession index={monKey} routine={mondayExercise} editUrl={editUrl} exerciseIndex={exerciseIndex} /> : <p>Congrats, you have finished the routine or didn't add</p> }
+  
+        </TabPanel>
+        <TabPanel value={value} index={5} dir={theme.direction}>
+        { mondayExercise ? <GymSession index={monKey} routine={mondayExercise} editUrl={editUrl} exerciseIndex={exerciseIndex} /> : <p>Congrats, you have finished the routine or didn't add</p>}
+  
+        </TabPanel>
+        <TabPanel value={value} index={6} dir={theme.direction}>
+        { mondayExercise ?<GymSession index={monKey} routine={mondayExercise} editUrl={editUrl} exerciseIndex={exerciseIndex} /> : <p>Congrats, you have finished the routine or didn't add</p> }
+  
         </TabPanel>
       </SwipeableViews>
 

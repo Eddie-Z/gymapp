@@ -1,80 +1,93 @@
- import React, {useContext} from 'react'
-import { TextField, CardActions, CardContent, Grid,Card, Typography, MenuItem, Select, InputLabel, FormControl,IconButton} from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
-import DeleteIcon from '@material-ui/icons/Delete';
+import React, {useContext,useState} from 'react';
 import {BuildWorkoutContext} from '../../contexts/Provider'
+//import Grid from '@material-ui/core/Grid';
+import {ExpansionPanel,ExpansionPanelSummary,Typography,ExpansionPanelDetails,Grid, Button} from '@material-ui/core';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+//import { TextField, MenuItem ,Button, Select, InputLabel,FormControl} from '@material-ui/core';
+
+const EditExerciseForm = (props) => {
+    const {exercises,removeExercise,updateExercise,addToRoutine,editUrl,EditExercise} = useContext(BuildWorkoutContext);
+    const exercise = exercises[props.index];
+    const [exerciseName,setExerciseName] = useState(exercise.exerciseName);
+    const [idealSets,setIdealSets] = useState(exercise.idealSets);
+    const [idealReps,setIdealReps] = useState(exercise.idealReps);
+    const [restTime,setRestTime] = useState(exercise.restTime);
+    const [optionYoutubeUrl,setOptionalYoutubeUrl] = useState(exercise.optionYoutubeUrl);
+    const [muscleCategory, setMuscleCategory] = useState(exercise.muscleCategory);
 
 
- const EditExerciseForm = ({eachExercise}) => {
-    const {state,setState,removeExercise,updateExercise,addToDay} = useContext(BuildWorkoutContext);
-    const [exerciseName,setExerciseName] = React.useState(eachExercise.exerciseName)
-    const [idealReps,setIdealReps] = React.useState(eachExercise.idealReps)
-    const [idealSets,setIdealSets] = React.useState(eachExercise.idealSets)
-    const [restTime,setRestTime] = React.useState(eachExercise.restTime)
-    const [optionYoutubeUrl,setOptionYoutubeUrl] = React.useState(eachExercise.optionYoutubeUrl)
 
-    //handle edit
-    const handleEdit = (event) => {
-        console.log(event.currentTarget.value)
-        // const newExercise = JSON.parse(JSON.stringify(eachExercise));
-        // const updatedExercise = {
-        //     ...newExercise,
-        //     [event.currentTarget.name]:event.currentTarget.value
-        // }
-        // //
-        // // const updatedExercise = {
-        // //     //every attribute of the exercise then the new one
-        // //     ...this.props.exercise,
-        // //     [event.currentTarget.name]:event.currentTarget.value
-        // // }
 
-        //  updateExercise(eachExercise.id,updatedExercise);
-    };
-    //handle delete
-    const handleRemove = () => {
-        removeExercise(eachExercise.id);
-        console.log(eachExercise.id);
-        console.log("handleRemove")
+    const handleChange = event =>{
+   
+        //copy and update object
+        const updatedExercise = {...exercise, [event.currentTarget.name]:event.currentTarget.value}
+        updateExercise(props.index,updatedExercise);
+
+        //update interface
+        switch(event.currentTarget.name){
+                         case "exerciseName":
+                            setExerciseName(event.currentTarget.value);
+                            break;
+                         case "idealSets":
+                            setIdealSets(event.currentTarget.value);
+                             break;
+                         case "idealReps":
+                            setIdealReps(event.currentTarget.value)
+                             break;
+                             case "restTime":
+                                setRestTime(event.currentTarget.value)
+                            break;       
+                            case "muscleCategory":
+                                setMuscleCategory(event.currentTarget.value);
+                            break;
+                            case "optionYoutubeUrl":
+                                setOptionalYoutubeUrl(event.currentTarget.value);
+                            break;        
+        }
+
     }
-    const handleAdd = () =>{
-       console.log("handleAdd")
-       addToDay(eachExercise);
-    }
+
+        return(     
+            <div>
+                 <ExpansionPanel >
+                           <ExpansionPanelSummary
+                           expandIcon={<ExpandMoreIcon />}
+                           aria-controls="panel1a-content"
+                           id="panel1a-header"
+                           >
+                             <div style={{width:'100%'}}>
+                            <Typography> {muscleCategory} <br/> {exerciseName} {idealSets} sets x {idealReps} Reps | {restTime}s Rest </Typography>
+                            </div>
+                            <div>
+                             
+                            <Button fullWidth onClick={() => removeExercise(props.index)}>Remove From Exercise</Button> 
+                            <Button fullWidth onClick={() => addToRoutine(props.index)}>Add to Routine</Button>
+                           {/*<Button fullWidth onClick={() => EditExercise(props.index)}>Edit Routine</Button>*/} 
+                            
+                            
+                            </div>
+                           
+       
+                           </ExpansionPanelSummary>
+                           
+                           <ExpansionPanelDetails>
+                            <iframe width="560" height="315" src={editUrl(optionYoutubeUrl)} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                           </ExpansionPanelDetails>
+                        </ExpansionPanel>
 
 
-         return(
-
-            <Grid container >
-                <Card >
-                    <CardContent>
-                    <TextField fullWidth name="exerciseName" label="Exercise Name" margin="normal" value={exerciseName} onChange={e => setExerciseName(e.target.value)}/>
-                    <TextField fullWidth name="idealSets" label="Ideal Sets" margin="normal" value={idealSets}  onChange={e => setIdealSets(e.target.value)}/>
-                    <TextField fullWidth name="idealReps" label="Ideal Reps" margin="normal" value={idealReps}  onChange={e => setIdealReps(e.target.value)}/>
-                    <TextField fullWidth name="restTime" label="Rest Time" margin="normal" value={restTime} onChange={e => setRestTime(e.target.value)}/>
-                    <TextField fullWidth name="optionYoutubeUrl" label="Youtube Video" value={optionYoutubeUrl} onChange={e => setOptionYoutubeUrl(e.target.value)}/>
-
-                    <FormControl fullWidth>
-                    <InputLabel>Exercise Category</InputLabel>
-                    <Select fullWidth name="type" value={eachExercise.type} >
-                        <MenuItem value="Upper Body">Upper Body</MenuItem>
-                        <MenuItem value="Lower Body">Lower Body</MenuItem>
-                        <MenuItem value="Other">Other</MenuItem>
-                    </Select>
-                    </FormControl>
-
-                    </CardContent>
-                    <CardActions>
-                        <IconButton size="small" onClick={handleRemove}> <DeleteIcon/><Typography>Remove Exercise</Typography></IconButton>
                        
-                        <IconButton size="small" onClick={handleAdd}><AddIcon /><Typography>Add To</Typography></IconButton>
-                    </CardActions>
 
-                </Card>
-            </Grid>
-         )
-
- }
-
- export default EditExerciseForm;
-
- // <IconButton size="small" onClick={handleEdit}><AddIcon /><Typography>Save Edit</Typography></IconButton>
+              {/*          <EditExerciseForm eachExercise={eachExercise} key={eachExercise.key} />
+                 <TextField fullWidth name="exerciseName" label="Exercise Name" margin="normal" value={exerciseName} onChange={handleChange} required/>     
+                <TextField fullWidth name="idealSets" label="Ideal Sets" margin="normal"  value={idealSets} onChange={handleChange} required/>
+                <TextField fullWidth name="idealReps" label="Ideal Repetition" margin="normal" value={idealReps} onChange={handleChange} required/>
+                <TextField fullWidth name="restTime" label="Rest Time" margin="normal"  value={restTime} onChange={handleChange}/>
+                <TextField fullWidth name ="muscleCategory" label="Muscle Category" margin="normal"  value={muscleCategory} onChange={handleChange} />
+                <TextField fullWidth name="optionYoutubeUrl" label="Youtube Video" margin="normal" value={optionYoutubeUrl} onChange={handleChange}/>
+            */}
+            </div>
+        )
+}
+export default EditExerciseForm;

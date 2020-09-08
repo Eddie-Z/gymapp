@@ -4,11 +4,8 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import firebase from './firebase'
 
-firebase.firestore().collection('times').add({
-    title:'rubics cube'
-})
+
 
 
 ReactDOM.render(<App/>, document.getElementById('root'));

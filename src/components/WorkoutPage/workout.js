@@ -30,8 +30,9 @@ const useStyles = makeStyles(theme => ({
 class Workout extends React.Component {
     render(){
         return (
+            
                   <Tabs/>
-               // <GymSession/>
+                //<GymSession/>
         );
     }
 }

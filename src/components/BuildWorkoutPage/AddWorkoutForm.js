@@ -10,43 +10,32 @@ const AddWorkoutForm = () => {
     const [idealReps,setIdealReps] = useState('');
     const [restTime,setRestTime] = useState('');
     const [optionYoutubeUrl,setOptionalYoutubeUrl] = useState('');
-    const [exerciseCategory, setExerciseCategory] = useState('');
+    const [muscleCategory, setMuscleCategory] = useState('');
 
-    const handleSubmit = (e) => {
+    const createWorkout = (e) => {
         e.preventDefault();
-        addExercise(exerciseName,idealSets,idealReps,restTime,optionYoutubeUrl,exerciseCategory);
+      
+        //context api
+        addExercise(exerciseName,idealSets,idealReps,restTime,optionYoutubeUrl,muscleCategory);
+    
+        //reset form event.currentarget.reset()
         setExerciseName('');
         setIdealSets('');
         setIdealReps('');
         setRestTime('');
         setOptionalYoutubeUrl('');
-        setExerciseCategory('');
+        setMuscleCategory('');
     }
-        return(
-            <React.Fragment>
-            <Grid>
-            <form onSubmit={handleSubmit}>
-       
+        return(     
+            <form onSubmit={createWorkout}>
                 <TextField fullWidth name="exerciseName" label="Exercise Name" margin="normal" value={exerciseName} onChange={ (e) => setExerciseName(e.target.value)} required/>     
                 <TextField fullWidth name="idealSets" label="Ideal Sets" margin="normal"  value={idealSets} onChange={(e)=>setIdealSets(e.target.value)} required/>
-                <TextField fullWidth name="idealReps" label="Ideal Reps" margin="normal" value={idealReps} onChange={(e)=>setIdealReps(e.target.value)} required/>
+                <TextField fullWidth name="idealReps" label="Ideal Repetition" margin="normal" value={idealReps} onChange={(e)=>setIdealReps(e.target.value)} required/>
                 <TextField fullWidth name="restTime" label="Rest Time" margin="normal"  value={restTime} onChange={(e)=>setRestTime(e.target.value)} required/>
+                <TextField fullWidth name ="muscleCategory" label="Muscle Category" margin="normal"  value={muscleCategory} onChange={ (e) => setMuscleCategory(e.target.value)} required/>
                 <TextField fullWidth name="optionYoutubeUrl" label="Youtube Video" margin="normal" value={optionYoutubeUrl} onChange={ (e) => setOptionalYoutubeUrl(e.target.value)}/>
-
-                <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">Exercise Category</InputLabel>
-                    <Select  id="demo-simple-select" labelId="demo-simple-select-label" fullWidth name="type" value={exerciseCategory} onChange={ (e) => setExerciseCategory(e.target.value)} required>
-                        <MenuItem value="Upper Body">Upper Body</MenuItem>
-                        <MenuItem value="Lower Body">Lower Body</MenuItem>
-                        <MenuItem value="Other">Other</MenuItem>
-                    </Select>
-                </FormControl>
-
-                <Button fullWidth type="submit">Add Exercise</Button>
-
+                <Button fullWidth type="submit">Add To Exercise List</Button>
             </form>
-            </Grid>
-            </React.Fragment>
         )
 }
 export default AddWorkoutForm;
