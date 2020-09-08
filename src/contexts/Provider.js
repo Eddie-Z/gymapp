@@ -172,15 +172,18 @@ export function BuildWorkoutContextProvider({children}){
           
           if(url.search("youtu.be")!=-1){
                const embedUrl = url.replace("https://youtu.be/","https://www.youtube.com/embed/").replace("?t=","?start=");
-               
+              // debugger
                return embedUrl;
             
           }
           else{
              
-               const embedUrl = url.replace("watch?v=","embed/");
-               console.log(embedUrl)
-               return embedUrl;
+               const embedUrl = url.replace("watch?v=","embed/")
+               const posOfUrl = embedUrl.indexOf("&ab_channel")
+               const newUrl = embedUrl.slice(0,posOfUrl)
+               console.log(newUrl)
+              // debugger
+               return newUrl;
            
           }
        
