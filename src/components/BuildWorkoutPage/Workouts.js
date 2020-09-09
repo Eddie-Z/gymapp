@@ -61,7 +61,7 @@ const Workouts = () => {
             subheaderTypographyProps={{ align: 'center' }}
             className={classes.cardHeader}
           />
-          <CardContent>
+          <CardContent style={{maxHeight:'70%', overflow:'auto'}}>
             <div className={classes.cardPricing}>
               {editToggle?  <AddWorkoutForm></AddWorkoutForm> : <EditWorkoutForm></EditWorkoutForm>}
                
