@@ -1,3 +1,6 @@
+# Deployed on heroku
+https://secure-castle-42644.herokuapp.com/buildworkout
+
 # Purpose
 This application was developed to be a useful tool for me at the gym and to further develop skills in ReactJS. I chose to create a Gym app because it allows me to start off with the basics of React and as I progress and learn, I will be able to further improve the application. The idea is also verstaile in that, it would be something I would use on a daily basis. Also, it allows me to further dive into ui design, databases, and responsiveness.
 
