@@ -135,7 +135,7 @@ const Routines = () => {
                 <Grid item key={"Routines"} xs={12} sm={6} md={4}>
                 <Card className={classes.cardStyle}>
                 <CardHeader
-                  title={"Routines"}
+                  title={"Routines "+(selectedDay?"("+selectedDay+")":"")}
                   titleTypographyProps={{ align: 'center' }}
                   subheaderTypographyProps={{ align: 'center' }}
                   className={classes.cardHeader}
