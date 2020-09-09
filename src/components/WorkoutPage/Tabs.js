@@ -78,13 +78,24 @@ export default function FloatingActionButtonZoom() {
     setValue(index);
   };
 
- const {monday,editUrl,exerciseIndex} = useContext(BuildWorkoutContext);
-
-
+ const {monday,tuesday,wednesday,thursday,friday,saturday,sunday,editUrl,exerciseIndex} = useContext(BuildWorkoutContext);
   const mondayExercise = monday[Object.keys(monday)[exerciseIndex]];
-  console.log(mondayExercise);
+  const tuesdayExercise = tuesday[Object.keys(tuesday)[exerciseIndex]];
+  const wednesdayExercise = wednesday[Object.keys(wednesday)[exerciseIndex]];
+  const thursdayExercise = thursday[Object.keys(thursday)[exerciseIndex]];
+  const fridayExercise = friday[Object.keys(friday)[exerciseIndex]];
+  const saturdayExercise = saturday[Object.keys(saturday)[exerciseIndex]];
+  const sundayExercise = sunday[Object.keys(sunday)[exerciseIndex]];
+
+
   const monKey = Object.keys(monday)[exerciseIndex]
- 
+  const tueKey = Object.keys(tuesday)[exerciseIndex]
+  const wedKey = Object.keys(wednesday)[exerciseIndex]
+  const thurKey = Object.keys(thursday)[exerciseIndex]
+  const friKey = Object.keys(friday)[exerciseIndex]
+  const satKey = Object.keys(saturday)[exerciseIndex]
+  const sunKey = Object.keys(sunday)[exerciseIndex]
+  debugger
 
   return (
     <div className={classes.root}>
@@ -112,30 +123,30 @@ export default function FloatingActionButtonZoom() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}> 
-            { mondayExercise ? <GymSession index={monKey} routine={mondayExercise} editUrl={editUrl}/> : <p>Congrats, you have finished the routine or didn't add</p> }
+            { mondayExercise ? <GymSession index={monKey} len={Object.keys(monday).length} routine={mondayExercise} editUrl={editUrl}/> : <p>Congrats, you have finished the routine or didn't add</p> }
    
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-            {mondayExercise ? <GymSession index={monKey} routine={mondayExercise} editUrl={editUrl} exerciseIndex={exerciseIndex} />  : <p>Congrats, you have finished the routine or didn't add</p> }
+            {tuesdayExercise ? <GymSession index={tueKey} len={Object.keys(tuesday).length} routine={tuesdayExercise} editUrl={editUrl} exerciseIndex={exerciseIndex} />  : <p>Congrats, you have finished the routine or didn't add</p> }
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-            { mondayExercise ?<GymSession index={monKey} routine={mondayExercise} editUrl={editUrl} exerciseIndex={exerciseIndex} />  : <p>Congrats, you have finished the routine or didn't add</p>}
+            { wednesdayExercise ?<GymSession index={wedKey} len={Object.keys(wednesday).length} routine={wednesdayExercise} editUrl={editUrl} exerciseIndex={exerciseIndex} />  : <p>Congrats, you have finished the routine or didn't add</p>}
   
         </TabPanel>
         <TabPanel value={value} index={3} dir={theme.direction}>
-        { mondayExercise ?<GymSession index={monKey} routine={mondayExercise} editUrl={editUrl} exerciseIndex={exerciseIndex} /> : <p>Congrats, you have finished the routine or didn't add</p> }
+        { thursdayExercise ?<GymSession index={thurKey} len={Object.keys(thursday).length} routine={thursdayExercise} editUrl={editUrl} exerciseIndex={exerciseIndex} /> : <p>Congrats, you have finished the routine or didn't add</p> }
   
         </TabPanel>
         <TabPanel value={value} index={4} dir={theme.direction}>
-        { mondayExercise ?<GymSession index={monKey} routine={mondayExercise} editUrl={editUrl} exerciseIndex={exerciseIndex} /> : <p>Congrats, you have finished the routine or didn't add</p> }
+        { fridayExercise ?<GymSession index={friKey} len={Object.keys(friday).length} routine={fridayExercise} editUrl={editUrl} exerciseIndex={exerciseIndex} /> : <p>Congrats, you have finished the routine or didn't add</p> }
   
         </TabPanel>
         <TabPanel value={value} index={5} dir={theme.direction}>
-        { mondayExercise ? <GymSession index={monKey} routine={mondayExercise} editUrl={editUrl} exerciseIndex={exerciseIndex} /> : <p>Congrats, you have finished the routine or didn't add</p>}
+        { saturdayExercise ? <GymSession index={satKey} len={Object.keys(saturday).length} routine={saturdayExercise} editUrl={editUrl} exerciseIndex={exerciseIndex} /> : <p>Congrats, you have finished the routine or didn't add</p>}
   
         </TabPanel>
         <TabPanel value={value} index={6} dir={theme.direction}>
-        { mondayExercise ?<GymSession index={monKey} routine={mondayExercise} editUrl={editUrl} exerciseIndex={exerciseIndex} /> : <p>Congrats, you have finished the routine or didn't add</p> }
+        { sundayExercise ?<GymSession index={sunKey} len={Object.keys(sunday).length} routine={sundayExercise} editUrl={editUrl} exerciseIndex={exerciseIndex} /> : <p>Congrats, you have finished the routine or didn't add</p> }
   
         </TabPanel>
       </SwipeableViews>

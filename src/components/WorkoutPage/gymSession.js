@@ -56,7 +56,7 @@ const useStyles = makeStyles(theme => ({
    const [setCount, setSetCount] = useState(1);
 
    //Which set 
-   const [whichSet, setWhichSet] = useState(["","First Set", "Second set","Third Set", "Fourth Set","Fifth Set","Sixth Set","Seventh Set","Eighth Set", "Nineth Set","Tenth Set"])
+   const [whichSet, setWhichSet] = useState(["","First Set", "Second set","Third Set", "Fourth Set","Fifth Set","Sixth Set","Seventh Set","Eighth Set", "Nineth Set","Tenth Set","Eleventh Set","Twelth Set"])
 
    //How many reps completed
    const [repsCompleted,setRepsCompleted] = useState(0);
@@ -69,16 +69,20 @@ const useStyles = makeStyles(theme => ({
     const [expandedVideo, setExpandedVideo] = useState(false);
 
     const exercise = props.routine;
-
+    const length = props.len;
+    debugger
+  debugger
     const features = (action) =>{
         switch(action){
 
             //exercise Index
             case 'NEXT_WORKOUT':
+              if(exerciseIndex!==length-1){
                 setExerciseIndex(exerciseIndex+1);
+             }
                 break;
             case 'PREV_WORKOUT':
-                if(exerciseIndex!==-1){
+                if(exerciseIndex!==0){
                     setExerciseIndex(exerciseIndex-1);   
                 }
                 break;
