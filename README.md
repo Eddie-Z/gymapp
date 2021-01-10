@@ -1,4 +1,4 @@
-# Deployed on heroku
+# Deployed on Heroku
 https://secure-castle-42644.herokuapp.com/buildworkout
 
 # Purpose
